@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "~bootstrap": "bootstrap",
+      "~bootstrap-icons": "bootstrap-icons",
     },
   },
 });
