@@ -23,44 +23,18 @@ export default {
       status: "loading",
       formData: {
         title: "",
-        category: "All",
+        category: "all",
         featured: false,
       },
       lastApi: {
         currentPage: 0,
         lastPage: 0,
+        isQuery: false,
+        query: "",
       },
     };
   },
   methods: {
-    apiPhotos() {
-      axios
-        .get(this.baseUrl + "api/photos")
-        .then((response) => {
-          /* Save data */
-          this.photos = response.data.results.data;
-
-          /* Set pagination */
-          this.lastApi.currentPage = response.data.results.current_page;
-          this.lastApi.lastPage = response.data.results.last_page;
-        })
-        .catch((error) => {
-          /* Error */
-          this.status = "error";
-          console.log(error);
-        })
-        .finally(() => {
-          /* Set status */
-          if (this.status != "error") {
-            if (this.photos.length == 0) {
-              this.status = "no-photos";
-            } else {
-              this.status = "loaded";
-            }
-          }
-        });
-    },
-
     apiCategories() {
       axios
         .get(this.baseUrl + "api/categories")
@@ -73,14 +47,7 @@ export default {
           console.log(error);
         });
     },
-
-    apiSearch() {
-      const search = "search=true";
-      const title = "title=" + this.formData.title;
-      const category = "category=" + this.formData.category;
-      const featured = "featured=" + this.formData.featured;
-      const url = this.baseUrl + "api/photos?" + search + "&" + title + "&" + category + "&" + featured;
-
+    apiPhotos(url) {
       axios
         .get(url)
         .then((response) => {
@@ -105,21 +72,53 @@ export default {
               this.status = "loaded";
             }
           }
-          console.log(url);
         });
     },
+    apiSearch() {
+      const search = "search=true";
+      const title = "title=" + this.formData.title;
+      const category = "category=" + this.formData.category;
+      const featured = "featured=" + this.formData.featured;
 
+      this.lastApi.isQuery = true;
+      this.lastApi.query = search + "&" + title + "&" + category + "&" + featured;
+
+      const url = this.baseUrl + "api/photos?" + this.lastApi.query;
+      this.apiPhotos(url);
+
+      console.log(url);
+    },
+    apiLoadMore() {
+      let url = this.baseUrl + "api/photos?page=" + (parseFloat(this.lastApi.currentPage) + 1);
+
+      if (this.lastApi.isQuery) {
+        url += "&" + this.lastApi.query;
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          /* Save data */
+          this.photos = [...this.photos, ...response.data.results.data];
+
+          /* Set pagination */
+          this.lastApi.currentPage = response.data.results.current_page;
+          this.lastApi.lastPage = response.data.results.last_page;
+        })
+        .catch((error) => {
+          /* Error */
+          console.log(error);
+        });
+    },
     resetForm() {
       this.formData.title = "";
-      this.formData.category = "All";
+      this.formData.category = "all";
       this.formData.featured = false;
-      this.apiSearch();
     },
-
-    loadMore() {},
   },
   mounted() {
-    this.apiPhotos();
+    const url = this.baseUrl + "api/photos";
+    this.apiPhotos(url);
     this.apiCategories();
   },
 };
@@ -162,7 +161,7 @@ export default {
             <!-- Category -->
             <div class="col-auto me-2">
               <select class="form-select" aria-label="Default select example" v-model="formData.category">
-                <option value="All" selected>Tutte le categorie</option>
+                <option value="all" selected>Tutte le categorie</option>
                 <option v-for="category in categories" :key="category.id" :value="category.id">
                   {{ category.name }}
                 </option>
@@ -225,7 +224,7 @@ export default {
           :baseUrl="baseUrl"
           :currentPage="this.lastApi.currentPage"
           :lastPage="this.lastApi.lastPage"
-          @loadMore="loadMore()"
+          @loadMore="apiLoadMore()"
         />
       </div>
     </div>
