@@ -3,19 +3,21 @@ export default {
   name: "Image",
   props: {
     photo: Object,
-    backendUrl: String,
+    baseUrl: String,
   },
 };
 </script>
 
 <template>
   <div class="img-wrap rounded">
-    <img
-      class="img-fluid"
-      :src="backendUrl + 'storage/' + photo.image"
-      :alt="photo.title"
-    />
+    <!-- If photo.image start with http -->
+    <img v-if="photo.image.startsWith('http')" class="img-fluid" :src="photo.image" :alt="photo.title" loading="lazy" />
+    <!-- else -->
+    <img v-else class="img-fluid" :src="baseUrl + 'storage/' + photo.image" :alt="photo.title" loading="lazy" />
   </div>
+  <div>{{ photo.title }}</div>
+  <div>{{ photo.featured }}</div>
+  <div>{{ photo.category?.id }}</div>
 </template>
 
 <style scoped>
