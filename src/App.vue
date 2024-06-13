@@ -182,12 +182,12 @@ export default {
             </div>
             <!-- Submit -->
             <div class="col-auto">
-              <button class="btn btn-primary me-2" type="submit">
+              <button class="btn btn-link me-2" type="button" @click="resetForm()">
+                <span>Resetta i campi</span>
+              </button>
+              <button class="btn btn-primary" type="submit">
                 <i class="bi bi-search me-2"></i>
                 <span>Cerca</span>
-              </button>
-              <button class="btn btn-link" type="button" @click="resetForm()">
-                <span>Resetta i campi</span>
               </button>
             </div>
           </form>
