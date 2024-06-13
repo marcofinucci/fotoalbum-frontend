@@ -57,13 +57,19 @@ export default {
             <!-- If photo.image start with http -->
             <img
               v-if="photo.image.startsWith('http')"
-              class="img-fluid"
+              class="img-fluid rounded"
               :src="photo.image"
               :alt="photo.title"
               loading="lazy"
             />
             <!-- else -->
-            <img v-else class="img-fluid" :src="baseUrl + 'storage/' + photo.image" :alt="photo.title" loading="lazy" />
+            <img
+              v-else
+              class="img-fluid rounded"
+              :src="baseUrl + 'storage/' + photo.image"
+              :alt="photo.title"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
