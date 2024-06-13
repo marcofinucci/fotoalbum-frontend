@@ -45,13 +45,13 @@ export default {
             <i class="bi bi-star-fill"></i> <span>In evidenza</span>
           </div>
           <!-- Category -->
-          <div class="mb-5">
+          <div class="mb-4 mb-lg-5">
             <span class="text-secondary-emphasis">Categoria: </span>
             <span v-if="photo.category">{{ photo.category.name }}</span>
             <span v-else>Nessuna</span>
           </div>
           <!-- Description -->
-          <div v-if="photo.description" class="fs-4 mb-5">{{ photo.description }}</div>
+          <div v-if="photo.description" class="fs-4 mb-4 mb-lg-5">{{ photo.description }}</div>
           <!-- Image -->
           <div>
             <!-- If photo.image start with http -->

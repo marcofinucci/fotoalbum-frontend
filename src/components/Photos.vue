@@ -18,7 +18,7 @@ export default {
 
 <template>
   <div class="row">
-    <div class="col-6 mt-4" v-for="photo in photos" :key="photo.id">
+    <div class="col-lg-6 mt-4" v-for="photo in photos" :key="photo.id">
       <Image :baseUrl="baseUrl" :photo="photo" />
     </div>
   </div>

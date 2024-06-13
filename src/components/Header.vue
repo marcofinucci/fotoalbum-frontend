@@ -32,9 +32,9 @@ export default {
       <!-- Collapse -->
       <div class="collapse navbar-collapse" id="navbarToggler">
         <!-- Search -->
-        <form @submit.prevent="$emit('search')" class="row w-100 flex-nowrap align-items-center" role="search">
+        <form @submit.prevent="$emit('search')" class="row w-100 align-items-center mt-4 mt-lg-0" role="search">
           <!-- Title -->
-          <div class="col me-2">
+          <div class="col-12 col-lg me-2">
             <input
               class="form-control"
               type="search"
@@ -45,7 +45,7 @@ export default {
             />
           </div>
           <!-- Category -->
-          <div class="col-auto me-2">
+          <div class="col-12 col-lg-auto me-lg-2 mt-3 mt-lg-0">
             <select
               class="form-select"
               aria-label="Default select example"
@@ -59,7 +59,7 @@ export default {
             </select>
           </div>
           <!-- Featured -->
-          <div class="col-auto me-2">
+          <div class="col-12 col-lg-auto me-lg-2 mt-3 mt-lg-0">
             <div class="form-check form-switch mb-0">
               <input
                 class="form-check-input"
@@ -76,7 +76,7 @@ export default {
             </div>
           </div>
           <!-- Submit -->
-          <div class="col-auto">
+          <div class="col-12 col-lg-auto mt-3 mt-lg-0">
             <button class="btn btn-primary" type="submit">
               <i class="bi bi-search me-2"></i>
               <span>Cerca</span>
