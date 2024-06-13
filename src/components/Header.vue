@@ -7,7 +7,7 @@ export default {
     featured: String,
     categories: Array,
   },
-  emits: ["update:title", "update:category", "update:featured", "search", "reset"],
+  emits: ["update:title", "update:category", "update:featured", "search"],
 };
 </script>
 
@@ -69,14 +69,14 @@ export default {
                 :value="featured == 'true' ? 'false' : 'true'"
                 @input="$emit('update:featured', $event.target.value)"
               />
-              <label class="form-check-label" for="featured">In evidenza</label>
+              <label class="form-check-label" for="featured">
+                <i class="bi bi-star-fill me-2"></i>
+                <span>In evidenza</span>
+              </label>
             </div>
           </div>
           <!-- Submit -->
           <div class="col-auto">
-            <button class="btn btn-link me-2" type="button" @click="$emit('reset')">
-              <span>Resetta i campi</span>
-            </button>
             <button class="btn btn-primary" type="submit">
               <i class="bi bi-search me-2"></i>
               <span>Cerca</span>
@@ -87,3 +87,15 @@ export default {
     </div>
   </nav>
 </template>
+
+<style scoped>
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgb(0 0 0 / 80%);
+}
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.0625rem;
+}
+</style>

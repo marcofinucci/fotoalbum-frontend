@@ -112,11 +112,6 @@ export default {
           console.log(error);
         });
     },
-    resetForm() {
-      this.formData.title = "";
-      this.formData.category = "all";
-      this.formData.featured = false;
-    },
   },
   mounted() {
     const url = this.baseUrl + "api/photos";
@@ -135,7 +130,6 @@ export default {
       v-model:featured="formData.featured"
       :categories="categories"
       @search="apiSearch()"
-      @reset="resetForm()"
     />
   </header>
 
@@ -178,15 +172,3 @@ export default {
     <Footer />
   </footer>
 </template>
-
-<style scoped>
-.navbar {
-  backdrop-filter: blur(10px);
-  background-color: rgb(0 0 0 / 80%);
-}
-.navbar-brand {
-  font-weight: 600;
-  font-size: 1.125rem;
-  letter-spacing: 0.0625rem;
-}
-</style>
