@@ -16,8 +16,8 @@ export default {
     <img v-else class="img-fluid" :src="baseUrl + 'storage/' + photo.image" :alt="photo.title" loading="lazy" />
   </div>
   <div>{{ photo.title }}</div>
-  <div>{{ photo.featured }}</div>
-  <div>{{ photo.category?.id }}</div>
+  <div>In evidenza: {{ photo.featured }}</div>
+  <div>Categoria: {{ photo.category?.id }}</div>
 </template>
 
 <style scoped>

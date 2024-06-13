@@ -5,6 +5,7 @@ import Spinner from "./components/Spinner.vue";
 import Photos from "./components/Photos.vue";
 import Jumbotron from "./components/Jumbotron.vue";
 import Footer from "./components/Footer.vue";
+import Header from "./components/Header.vue";
 
 export default {
   name: "App",
@@ -14,6 +15,7 @@ export default {
     Photos,
     Jumbotron,
     Footer,
+    Header,
   },
   data() {
     return {
@@ -24,7 +26,7 @@ export default {
       formData: {
         title: "",
         category: "all",
-        featured: false,
+        featured: "false",
       },
       lastApi: {
         currentPage: 0,
@@ -127,73 +129,14 @@ export default {
 <template>
   <!-- Header -->
   <header id="app-header">
-    <nav class="navbar navbar-expand-lg fixed-top border-bottom border-body py-3">
-      <div class="container-fluid">
-        <!-- Logo -->
-        <div class="navbar-brand text-secondary-emphasis pe-5">FOTO ALBUM</div>
-        <!-- Toggle -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarToggler"
-          aria-controls="navbarToggler"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="navbarToggler">
-          <!-- Search -->
-          <form @submit.prevent="apiSearch()" class="row w-100 flex-nowrap align-items-center" role="search">
-            <!-- Title -->
-            <div class="col me-2">
-              <input
-                class="form-control"
-                type="search"
-                placeholder="Cerca per titolo"
-                aria-label="Search"
-                v-model="formData.title"
-              />
-            </div>
-            <!-- Category -->
-            <div class="col-auto me-2">
-              <select class="form-select" aria-label="Default select example" v-model="formData.category">
-                <option value="all" selected>Tutte le categorie</option>
-                <option v-for="category in categories" :key="category.id" :value="category.id">
-                  {{ category.name }}
-                </option>
-              </select>
-            </div>
-            <!-- Featured -->
-            <div class="col-auto me-2">
-              <div class="form-check form-switch mb-0">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckChecked"
-                  v-model="formData.featured"
-                />
-                <label class="form-check-label" for="flexSwitchCheckChecked">In evidenza</label>
-              </div>
-            </div>
-            <!-- Submit -->
-            <div class="col-auto">
-              <button class="btn btn-link me-2" type="button" @click="resetForm()">
-                <span>Resetta i campi</span>
-              </button>
-              <button class="btn btn-primary" type="submit">
-                <i class="bi bi-search me-2"></i>
-                <span>Cerca</span>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </nav>
+    <Header
+      v-model:title="formData.title"
+      v-model:category="formData.category"
+      v-model:featured="formData.featured"
+      :categories="categories"
+      @search="apiSearch()"
+      @reset="resetForm()"
+    />
   </header>
 
   <!-- Main -->
