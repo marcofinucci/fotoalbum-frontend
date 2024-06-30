@@ -39,19 +39,19 @@ export default {
           <h1 class="modal-title fs-3" :id="'modal-label-' + photo.id">{{ photo.title }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body mb-2">
           <!-- Featured -->
           <div v-if="photo.featured" class="text-primary mb-1">
             <i class="bi bi-star-fill"></i> <span>In evidenza</span>
           </div>
           <!-- Category -->
-          <div class="mb-4 mb-lg-5">
+          <div class="mb-2">
             <span class="text-secondary-emphasis">Categoria: </span>
             <span v-if="photo.category">{{ photo.category.name }}</span>
             <span v-else>Nessuna</span>
           </div>
           <!-- Description -->
-          <div v-if="photo.description" class="fs-4 mb-4 mb-lg-5">{{ photo.description }}</div>
+          <div v-if="photo.description" class="fs-4 mb-4">{{ photo.description }}</div>
           <!-- Image -->
           <div>
             <!-- If photo.image start with http -->

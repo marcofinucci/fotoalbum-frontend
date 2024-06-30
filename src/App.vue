@@ -6,6 +6,7 @@ import Photos from "./components/Photos.vue";
 import Jumbotron from "./components/Jumbotron.vue";
 import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
+import Contact from "./components/Contact.vue";
 
 export default {
   name: "App",
@@ -16,6 +17,7 @@ export default {
     Jumbotron,
     Footer,
     Header,
+    Contact,
   },
   data() {
     return {
@@ -165,6 +167,8 @@ export default {
         />
       </div>
     </div>
+
+    <Contact :baseUrl="baseUrl" />
   </main>
 
   <!-- Footer -->
